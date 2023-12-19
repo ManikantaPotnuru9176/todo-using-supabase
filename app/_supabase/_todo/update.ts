@@ -2,13 +2,13 @@ import supabase from "@/app/_utils/_todo/supabase";
 
 export const updateData = async (
   tableName: string,
-  updates: object,
+  updatedData: object,
   id: number
 ) => {
   try {
     const { data, error, status } = await supabase
       .from(tableName)
-      .update(updates)
+      .update(updatedData)
       .eq("id", id);
 
     if (error && status !== 406) throw error;
