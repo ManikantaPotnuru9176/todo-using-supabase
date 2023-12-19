@@ -1,8 +1,10 @@
 import supabase from "@/app/_utils/_todo/supabase";
 
-export const getData = async (tableName: string) => {
+export const getData = async (tableName: string, columnNames: string) => {
   try {
-    const { data, error, status } = await supabase.from(tableName).select();
+    const { data, error, status } = await supabase
+      .from(tableName)
+      .select(columnNames);
 
     if (error && status !== 406) throw error;
 

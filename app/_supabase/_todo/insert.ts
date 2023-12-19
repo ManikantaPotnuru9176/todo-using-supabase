@@ -1,6 +1,6 @@
 import supabase from "@/app/_utils/_todo/supabase";
 
-export const createData = async (tableName: string, newData: object) => {
+export const insertData = async (tableName: string, newData: object) => {
   try {
     const { data, error, status } = await supabase
       .from(tableName)
