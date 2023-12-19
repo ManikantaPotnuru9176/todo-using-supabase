@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import CustomThemeController from "./_providers/CustomThemeController";
+import { ReactQueryProvider } from "./_utils/_todo/ReactQueryProvider";
 
 export const metadata: Metadata = {
   title: "Todo App",
@@ -12,5 +13,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <CustomThemeController>{children}</CustomThemeController>;
+  return (
+    <ReactQueryProvider>
+      <CustomThemeController>{children}</CustomThemeController>
+    </ReactQueryProvider>
+  );
 }
