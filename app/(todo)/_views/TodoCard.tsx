@@ -1,7 +1,7 @@
 import Input from "@/app/_components/_todo/Input";
 import React from "react";
 
-const Todo = () => {
+const TodoCard = () => {
   return (
     <div>
       <Input />
@@ -9,4 +9,4 @@ const Todo = () => {
   );
 };
 
-export default Todo;
+export default TodoCard;

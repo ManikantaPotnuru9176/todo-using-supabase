@@ -1,9 +1,9 @@
-import Todo from "../../_views/Todo";
+import TodoCard from "../../_views/TodoCard";
 
 export default function Home() {
   return (
     <>
-      <Todo />
+      <TodoCard />
     </>
   );
 }
