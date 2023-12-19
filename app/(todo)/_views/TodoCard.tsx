@@ -1,3 +1,5 @@
+"use client";
+
 import Button from "@/app/_components/_todo/Button";
 import Input from "@/app/_components/_todo/Input";
 import TodoItem from "@/app/_components/_todo/TodoItem";
