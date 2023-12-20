@@ -17,6 +17,7 @@ const TodoCard = () => {
   const [updateInput, setUpdateInput] = useState("");
   const [isEditMode, setIsEditMode] = useState(false);
   const [editId, setEditId] = useState(-1);
+  const [loading, setLoading] = useState(false);
 
   const { data, isLoading } = useQuery({
     queryKey: ["TodoData"],
@@ -26,23 +27,53 @@ const TodoCard = () => {
   const insertMutation = useMutation({
     mutationFn: (newTodo: { task: string; completed: boolean }) =>
       insertData("todos", newTodo),
+    onMutate: () => {
+      setLoading(true);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["TodoData"] });
+      setLoading(false);
+    },
+    onError: () => {
+      setLoading(false);
+    },
+    onSettled: () => {
+      setLoading(false);
     },
   });
 
   const updateMutation = useMutation({
     mutationFn: ({ id, updatedData }: { id: number; updatedData: object }) =>
       updateData("todos", updatedData, id),
+    onMutate: () => {
+      setLoading(true);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["TodoData"] });
+      setLoading(false);
+    },
+    onError: () => {
+      setLoading(false);
+    },
+    onSettled: () => {
+      setLoading(false);
     },
   });
 
   const deleteMutation = useMutation({
     mutationFn: ({ id }: { id: number }) => deleteData("todos", id),
+    onMutate: () => {
+      setLoading(true);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["TodoData"] });
+      setLoading(false);
+    },
+    onError: () => {
+      setLoading(false);
+    },
+    onSettled: () => {
+      setLoading(false);
     },
   });
 
@@ -92,19 +123,32 @@ const TodoCard = () => {
             Add Task
           </Button>
         </div>
-        <div className="flex-col space-y-3">
-          {data?.map((todo) => (
-            <TodoItem
-              key={todo.id}
-              id={todo.id}
-              task={todo.task}
-              completed={todo.completed}
-              onEdit={handleEdit}
-              onDelete={deleteTodo}
-              onComplete={updateTodo}
-            />
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="flex justify-center">
+            <span className="loading loading-bars loading-lg my-16" />
+          </div>
+        ) : (
+          <div className="flex-col space-y-3">
+            {data?.map((todo) =>
+              loading && todo.id === editId ? (
+                // eslint-disable-next-line react/jsx-key
+                <div className="flex justify-center">
+                  <span className="loading loading-dots loading-lg my-3" />
+                </div>
+              ) : (
+                <TodoItem
+                  key={todo.id}
+                  id={todo.id}
+                  task={todo.task}
+                  completed={todo.completed}
+                  onEdit={handleEdit}
+                  onDelete={deleteTodo}
+                  onComplete={updateTodo}
+                />
+              )
+            )}
+          </div>
+        )}
       </div>
       <dialog id="my_modal_5" open={isEditMode} className="modal modal-middle">
         <div className="modal-box">
