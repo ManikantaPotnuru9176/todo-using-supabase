@@ -2,7 +2,7 @@ import React from "react";
 import Button from "./Button";
 
 const TodoItem = (props: {
-  id: number;
+  id: any;
   task: string;
   completed: boolean;
   onEdit: Function;

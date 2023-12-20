@@ -19,7 +19,7 @@ const TodoCard = () => {
   const [editId, setEditId] = useState(-1);
   const [loading, setLoading] = useState(false);
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading }: { data: any; isLoading: boolean } = useQuery({
     queryKey: ["TodoData"],
     queryFn: () => getData("todos", "*"),
   });
@@ -129,23 +129,28 @@ const TodoCard = () => {
           </div>
         ) : (
           <div className="flex-col space-y-3">
-            {data?.map((todo) =>
-              loading && todo.id === editId ? (
-                // eslint-disable-next-line react/jsx-key
-                <div className="flex justify-center">
-                  <span className="loading loading-dots loading-lg my-3" />
-                </div>
-              ) : (
-                <TodoItem
-                  key={todo.id}
-                  id={todo.id}
-                  task={todo.task}
-                  completed={todo.completed}
-                  onEdit={handleEdit}
-                  onDelete={deleteTodo}
-                  onComplete={updateTodo}
-                />
-              )
+            {data?.map(
+              (todo: {
+                id: React.Key | null | undefined;
+                task: string;
+                completed: boolean;
+              }) =>
+                loading && todo.id === editId ? (
+                  // eslint-disable-next-line react/jsx-key
+                  <div className="flex justify-center">
+                    <span className="loading loading-dots loading-lg my-3" />
+                  </div>
+                ) : (
+                  <TodoItem
+                    key={todo.id}
+                    id={todo.id}
+                    task={todo.task}
+                    completed={todo.completed}
+                    onEdit={handleEdit}
+                    onDelete={deleteTodo}
+                    onComplete={updateTodo}
+                  />
+                )
             )}
           </div>
         )}
