@@ -8,56 +8,54 @@ import { getData } from "@/app/_supabase/_todo/get";
 import { insertData } from "@/app/_supabase/_todo/insert";
 import { updateData } from "@/app/_supabase/_todo/update";
 import React, { useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 const TodoCard = () => {
   const queryClient = useQueryClient();
 
   const [input, setInput] = useState("");
+  const [updateInput, setUpdateInput] = useState("");
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editId, setEditId] = useState(-1);
 
   const { data, isLoading } = useQuery({
     queryKey: ["TodoData"],
     queryFn: () => getData("todos", "*"),
   });
 
-  const insertMutation = useMutation(
-    (newTodo: { task: string; completed: boolean }) =>
+  const insertMutation = useMutation({
+    mutationFn: (newTodo: { task: string; completed: boolean }) =>
       insertData("todos", newTodo),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["TodoData"]);
-      },
-    }
-  );
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["TodoData"] });
+    },
+  });
 
-  const updateMutation = useMutation(
-    ({ id, updatedData }: { id: number; updatedData: { task: string } }) =>
+  const updateMutation = useMutation({
+    mutationFn: ({ id, updatedData }: { id: number; updatedData: object }) =>
       updateData("todos", updatedData, id),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["TodoData"]);
-      },
-    }
-  );
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["TodoData"] });
+    },
+  });
 
-  const deleteMutation = useMutation(
-    ({ id }: { id: number }) => deleteData("todos", id),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["TodoData"]);
-      },
-    }
-  );
+  const deleteMutation = useMutation({
+    mutationFn: ({ id }: { id: number }) => deleteData("todos", id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["TodoData"] });
+    },
+  });
 
   const addTodo = () => {
     insertMutation.mutate({ task: input, completed: false });
     setInput("");
   };
 
-  const updateTodo = (id: number) => {
-    const updatedData = { id, updatedData: { task: input } };
+  const updateTodo = (id: number, newData: object) => {
+    const updatedData = { id, updatedData: newData };
     updateMutation.mutate(updatedData);
     setInput("");
+    handleCancel();
   };
 
   const deleteTodo = (id: number) => {
@@ -67,6 +65,21 @@ const TodoCard = () => {
 
   const handleInputChange = (e: { target: any }) => {
     setInput(e.target.value);
+  };
+
+  const handleUpadteInputChange = (e: { target: any }) => {
+    setUpdateInput(e.target.value);
+  };
+
+  const handleEdit = (id: number, task: string) => {
+    setIsEditMode(true);
+    setEditId(id);
+    setUpdateInput(task);
+  };
+
+  const handleCancel = () => {
+    setIsEditMode(false);
+    setUpdateInput("");
   };
 
   return (
@@ -85,12 +98,33 @@ const TodoCard = () => {
               key={todo.id}
               id={todo.id}
               task={todo.task}
-              onUpadte={updateTodo}
+              completed={todo.completed}
+              onEdit={handleEdit}
               onDelete={deleteTodo}
+              onComplete={updateTodo}
             />
           ))}
         </div>
       </div>
+      <dialog id="my_modal_5" open={isEditMode} className="modal modal-middle">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Edit the data</h3>
+          <Input val={updateInput} onInputChange={handleUpadteInputChange} />
+          <div className="modal-action">
+            <form method="dialog" className="space-x-2">
+              <button
+                className="btn"
+                onClick={() => updateTodo(editId, { task: updateInput })}
+              >
+                Update
+              </button>
+              <button className="btn" onClick={handleCancel}>
+                Cancel
+              </button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 };

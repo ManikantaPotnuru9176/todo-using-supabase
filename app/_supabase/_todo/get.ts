@@ -4,7 +4,8 @@ export const getData = async (tableName: string, columnNames: string) => {
   try {
     const { data, error, status } = await supabase
       .from(tableName)
-      .select(columnNames);
+      .select(columnNames)
+      .order("id");
 
     if (error && status !== 406) throw error;
 
