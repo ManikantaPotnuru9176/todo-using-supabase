@@ -14,12 +14,6 @@ import useTodoStore from "@/app/_zustand/_todo/todoStore";
 const TodoCard = () => {
   const queryClient = useQueryClient();
 
-  // const [input, setInput] = useState("");
-  // const [updateInput, setUpdateInput] = useState("");
-  // const [isEditMode, setIsEditMode] = useState(false);
-  // const [editId, setEditId] = useState(-1);
-  // const [loading, setLoading] = useState(false);
-
   const {
     input,
     updateInput,

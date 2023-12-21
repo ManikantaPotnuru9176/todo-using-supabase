@@ -1,11 +1,13 @@
 "use client";
 
+import useTodoStore from "../_zustand/_todo/todoStore";
+
 export default function CustomThemeController({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const theme = "night";
+  const { theme } = useTodoStore();
 
   return (
     <html lang="en" data-theme={theme}>
