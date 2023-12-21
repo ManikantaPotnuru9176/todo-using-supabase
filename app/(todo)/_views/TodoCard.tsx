@@ -9,15 +9,29 @@ import { insertData } from "@/app/_supabase/_todo/insert";
 import { updateData } from "@/app/_supabase/_todo/update";
 import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import useTodoStore from "@/app/_zustand/_todo/todoStore";
 
 const TodoCard = () => {
   const queryClient = useQueryClient();
 
-  const [input, setInput] = useState("");
-  const [updateInput, setUpdateInput] = useState("");
-  const [isEditMode, setIsEditMode] = useState(false);
-  const [editId, setEditId] = useState(-1);
-  const [loading, setLoading] = useState(false);
+  // const [input, setInput] = useState("");
+  // const [updateInput, setUpdateInput] = useState("");
+  // const [isEditMode, setIsEditMode] = useState(false);
+  // const [editId, setEditId] = useState(-1);
+  // const [loading, setLoading] = useState(false);
+
+  const {
+    input,
+    updateInput,
+    isEditMode,
+    editId,
+    loading,
+    setInput,
+    setUpdateInput,
+    setIsEditMode,
+    setEditId,
+    setLoading,
+  } = useTodoStore();
 
   const { data, isLoading }: { data: any; isLoading: boolean } = useQuery({
     queryKey: ["TodoData"],
