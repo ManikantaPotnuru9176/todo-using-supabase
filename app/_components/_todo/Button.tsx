@@ -10,10 +10,7 @@ const Button = (props: {
   const { color, type, size, func, children } = props;
 
   return (
-    <button
-      className={`btn btn-${size} btn-${type} btn-${color}`}
-      onClick={() => func()}
-    >
+    <button className={`btn ${size} ${type} ${color}`} onClick={() => func()}>
       {children}
     </button>
   );

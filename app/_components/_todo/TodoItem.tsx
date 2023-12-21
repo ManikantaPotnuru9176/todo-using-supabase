@@ -22,14 +22,19 @@ const TodoItem = (props: {
       <span className={`${completed ? "line-through" : ""}`}>{task}</span>
       <div className={`space-x-2 ${completed ? "hidden" : ""}`}>
         <Button
-          color="green-200"
+          color="btn-accent"
           type=""
-          size="sm"
+          size="btn-sm"
           func={() => onEdit(id, task)}
         >
           Edit
         </Button>
-        <Button color="red" type="" size="sm" func={() => onDelete(id)}>
+        <Button
+          color="btn-error"
+          type=""
+          size="btn-sm"
+          func={() => onDelete(id)}
+        >
           Delete
         </Button>
       </div>

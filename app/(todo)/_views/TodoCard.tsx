@@ -111,15 +111,25 @@ const TodoCard = () => {
   const handleCancel = () => {
     setIsEditMode(false);
     setUpdateInput("");
+    setEditId(-1);
   };
 
   return (
     <div className="card bg-base-100 shadow-xl items-center mt-4 min-w-fit">
       <h2 className="card-title pt-2">Todo Using Supabase</h2>
-      <div className="card-body px-2 py-6 md:p-10 min-w-full max-w-2xl space-y-8">
+      <div
+        className={`card-body px-2 py-6 md:p-10 min-w-full max-w-2xl space-y-8 ${
+          isEditMode && "blur-sm"
+        }`}
+      >
         <div className="flex flex-row justify-between space-x-4">
           <Input val={input} onInputChange={handleInputChange} />
-          <Button color="neutral" type="outline" size="" func={addTodo}>
+          <Button
+            color="btn-neutral"
+            type="btn-outline"
+            size="btn-md"
+            func={addTodo}
+          >
             Add Task
           </Button>
         </div>
@@ -161,15 +171,22 @@ const TodoCard = () => {
           <Input val={updateInput} onInputChange={handleUpadteInputChange} />
           <div className="modal-action">
             <form method="dialog" className="space-x-2">
-              <button
-                className="btn"
-                onClick={() => updateTodo(editId, { task: updateInput })}
+              <Button
+                func={handleCancel}
+                color="btn-error"
+                type="btn-md"
+                size=""
+              >
+                Cancel
+              </Button>
+              <Button
+                func={() => updateTodo(editId, { task: updateInput })}
+                color="btn-accent"
+                type=""
+                size="btn-md"
               >
                 Update
-              </button>
-              <button className="btn" onClick={handleCancel}>
-                Cancel
-              </button>
+              </Button>
             </form>
           </div>
         </div>
