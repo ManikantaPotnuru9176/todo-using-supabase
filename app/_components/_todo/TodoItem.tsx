@@ -12,14 +12,14 @@ const TodoItem = (props: {
   const { id, task, onEdit, completed, onDelete, onComplete } = props;
 
   return (
-    <div role="alert" className={`alert ${completed ? "bg-green-200" : ""}`}>
+    <div role="alert" className={`alert ${completed ? "bg-warning" : ""}`}>
       <input
         type="checkbox"
         className="checkbox checkbox-xs checkbox-success"
         checked={completed}
         onChange={() => onComplete(id, { completed: !completed })}
       />
-      <span className={`${completed ? "line-through" : ""}`}>{task}</span>
+      <span>{task}</span>
       <div className={`space-x-2 ${completed ? "hidden" : ""}`}>
         <Button
           color="btn-accent"
