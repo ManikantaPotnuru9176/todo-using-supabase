@@ -138,6 +138,8 @@ const TodoCard = () => {
             size="medium"
             outline
             icon="add"
+            iconAtRight
+            noAnimation
             onClick={() => addTodo()}
           >
             Add Task
@@ -181,11 +183,16 @@ const TodoCard = () => {
           <Input val={updateInput} onInputChange={handleUpadteInputChange} />
           <div className="modal-action">
             <form method="dialog" className="space-x-2">
-              <Button state="error" onClick={() => handleCancel()}>
+              <Button
+                state="error"
+                icon="cancel"
+                onClick={() => handleCancel()}
+              >
                 Cancel
               </Button>
               <Button
                 state="success"
+                icon="update"
                 onClick={() => updateTodo(editId, { task: updateInput })}
               >
                 Update

@@ -21,10 +21,20 @@ const TodoItem = (props: {
       />
       <span>{task}</span>
       <div className={`space-x-2 ${completed ? "hidden" : ""}`}>
-        <Button state="info" size="small" onClick={() => onEdit(id, task)}>
+        <Button
+          state="info"
+          size="small"
+          icon="edit"
+          onClick={() => onEdit(id, task)}
+        >
           Edit
         </Button>
-        <Button state="error" size="small" onClick={() => onDelete(id)}>
+        <Button
+          state="error"
+          size="small"
+          icon="delete"
+          onClick={() => onDelete(id)}
+        >
           Delete
         </Button>
       </div>
