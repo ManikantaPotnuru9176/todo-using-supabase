@@ -1,7 +1,7 @@
 "use client";
 
-import Button from "@/app/(todo)/_components/Button";
-import Input from "@/app/(todo)/_components/Input";
+import Button from "@/app/_components/Button";
+import Input from "@/app/_components/Input";
 import TodoItem from "@/app/(todo)/_components/TodoItem";
 import { deleteData } from "@/app/_supabase/delete";
 import { getData } from "@/app/_supabase/get";
