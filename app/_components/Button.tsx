@@ -1,16 +1,11 @@
 import React from "react";
+import { cn } from "../_utils/cn";
 
-const Button = (props: {
-  color: string;
-  type: string;
-  size: string;
-  func: Function;
-  children: React.ReactNode;
-}) => {
-  const { color, type, size, func, children } = props;
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
+const Button = ({ className, children, ...props }: ButtonProps) => {
   return (
-    <button className={`btn ${size} ${type} ${color}`} onClick={() => func()}>
+    <button className={cn("btn", className)} {...props}>
       {children}
     </button>
   );

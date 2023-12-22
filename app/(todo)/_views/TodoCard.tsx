@@ -133,10 +133,8 @@ const TodoCard = () => {
         <div className="flex flex-row justify-between space-x-4">
           <Input val={input} onInputChange={handleInputChange} />
           <Button
-            color="btn-neutral"
-            type="btn-outline"
-            size="btn-md"
-            func={addTodo}
+            className="btn-neutral btn-outline btn-md"
+            onClick={() => addTodo()}
           >
             Add Task
           </Button>
@@ -180,18 +178,14 @@ const TodoCard = () => {
           <div className="modal-action">
             <form method="dialog" className="space-x-2">
               <Button
-                func={handleCancel}
-                color="btn-error"
-                type="btn-md"
-                size=""
+                className="btn-error btn-md"
+                onClick={() => handleCancel()}
               >
                 Cancel
               </Button>
               <Button
-                func={() => updateTodo(editId, { task: updateInput })}
-                color="btn-accent"
-                type=""
-                size="btn-md"
+                className="btn-accent btn-md"
+                onClick={() => updateTodo(editId, { task: updateInput })}
               >
                 Update
               </Button>
