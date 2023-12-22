@@ -133,8 +133,9 @@ const TodoCard = () => {
         <div className="flex flex-row justify-between space-x-4">
           <Input val={input} onInputChange={handleInputChange} />
           <Button
-            variant="outline"
-            // className="btn-neutral btn-outline btn-md"
+            variant="neutral"
+            size="medium"
+            outline
             onClick={() => addTodo()}
           >
             Add Task
@@ -178,14 +179,11 @@ const TodoCard = () => {
           <Input val={updateInput} onInputChange={handleUpadteInputChange} />
           <div className="modal-action">
             <form method="dialog" className="space-x-2">
-              <Button
-                className="btn-error btn-md"
-                onClick={() => handleCancel()}
-              >
+              <Button state="error" onClick={() => handleCancel()}>
                 Cancel
               </Button>
               <Button
-                className="btn-accent btn-md"
+                state="success"
                 onClick={() => updateTodo(editId, { task: updateInput })}
               >
                 Update

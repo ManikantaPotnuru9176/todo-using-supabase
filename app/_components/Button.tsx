@@ -22,37 +22,72 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?:
     | "default"
-    | "destructive"
-    | "outline"
+    | "neutral"
+    | "primary"
     | "secondary"
+    | "accent"
     | "ghost"
+    | "glass"
     | "link";
-  size?: "default" | "xs" | "sm" | "lg" | "icon";
+  active?: boolean;
+  outline?: boolean;
+  state?: "default" | "info" | "success" | "warning" | "error";
+  size?: "default" | "extrasmall" | "small" | "medium" | "large";
+  wide?: boolean;
+  disabled?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "default", size = "default", ...props }, ref) => {
-    const variantClassNames = {
-      default: "btn-primary",
-      destructive: "btn-destructive",
-      outline: "btn-neutral btn-outline",
+  (
+    {
+      className,
+      variant = "default",
+      active = false,
+      outline = false,
+      state = "default",
+      size = "default",
+      wide = false,
+      disabled = false,
+      ...props
+    },
+    ref
+  ) => {
+    const variants = {
+      default: "btn",
+      neutral: "btn-neutral",
+      primary: "btn-primary",
       secondary: "btn-secondary",
+      accent: "btn-accent",
       ghost: "btn-ghost",
+      glass: "btn glass",
       link: "btn-link",
     };
 
-    const sizeClassNames = {
+    const states = {
+      default: "",
+      info: "btn-info",
+      success: "btn-success",
+      warning: "btn-warning",
+      error: "btn-error",
+    };
+
+    const sizes = {
       default: "btn-md",
-      xs: "btn-xs",
-      sm: "btn-sm",
-      lg: "btn-lg",
-      icon: "h-10 w-10",
+      extrasmall: "btn-xs",
+      small: "btn-sm",
+      medium: "btn-md",
+      large: "btn-lg",
     };
 
     const buttonClassName = cn(
       "btn",
-      variantClassNames[variant],
-      sizeClassNames[size],
+      variants[variant],
+      { "btn-active": active },
+      states[state],
+      { "btn-outline": outline },
+      sizes[size],
+      { "btn-wide": wide },
+      { "btn-disabled": disabled },
       className
     );
 
