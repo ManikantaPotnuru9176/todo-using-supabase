@@ -25,6 +25,7 @@ const TodoItem = (props: {
           state="info"
           size="small"
           icon="edit"
+          outline
           onClick={() => onEdit(id, task)}
         >
           Edit

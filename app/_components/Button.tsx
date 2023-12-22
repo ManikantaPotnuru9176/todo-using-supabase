@@ -130,6 +130,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           stroke-linejoin="round"
           stroke-miterlimit="2"
           className={getSizeClasses(size)}
+          fill="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -146,6 +147,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           stroke-linejoin="round"
           stroke-miterlimit="2"
           className={getSizeClasses(size)}
+          fill="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -162,6 +164,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           stroke-linejoin="round"
           stroke-miterlimit="2"
           className={getSizeClasses(size)}
+          fill="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -187,6 +190,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           fill-rule="evenodd"
           stroke-linejoin="round"
           className={getSizeClasses(size)}
+          fill="currentColor"
           stroke-miterlimit="2"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -201,7 +205,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className={getSizeClasses(size)}
-          fill="none"
+          fill="currentColor"
           viewBox="0 0 24 24"
           stroke="currentColor"
         >
@@ -217,6 +221,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className={getSizeClasses(size)}
+          fill="currentColor"
           viewBox="0 0 24 24"
         >
           <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z" />
@@ -225,6 +230,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       smile: (
         <svg
           className={getSizeClasses(size)}
+          fill="currentColor"
           xmlns="http://www.w3.org/2000/svg"
           fill-rule="evenodd"
           clip-rule="evenodd"
@@ -236,7 +242,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className={getSizeClasses(size)}
-          fill="none"
+          fill="currentColor"
           viewBox="0 0 24 24"
           stroke="currentColor"
         >
@@ -255,6 +261,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className={getSizeClasses(size)}
+          fill="currentColor"
           viewBox="0 0 24 24"
         >
           <path d="M12 10.999c1.437.438 2.562 1.564 2.999 3.001.44-1.437 1.565-2.562 3.001-3-1.436-.439-2.561-1.563-3.001-3-.437 1.436-1.562 2.561-2.999 2.999zm8.001.001c.958.293 1.707 1.042 2 2.001.291-.959 1.042-1.709 1.999-2.001-.957-.292-1.707-1.042-2-2-.293.958-1.042 1.708-1.999 2zm-1-9c-.437 1.437-1.563 2.562-2.998 3.001 1.438.44 2.561 1.564 3.001 3.002.437-1.438 1.563-2.563 2.996-3.002-1.433-.437-2.559-1.564-2.999-3.001zm-7.001 22c-6.617 0-12-5.383-12-12s5.383-12 12-12c1.894 0 3.63.497 5.37 1.179-2.948.504-9.37 3.266-9.37 10.821 0 7.454 5.917 10.208 9.37 10.821-1.5.846-3.476 1.179-5.37 1.179z" />
@@ -264,6 +271,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className={getSizeClasses(size)}
+          fill="currentColor"
           viewBox="0 0 24 24"
         >
           <path d="M14 19.25c0 .689-.559 1.25-1.25 1.25s-1.25-.561-1.25-1.25.559-1.25 1.25-1.25 1.25.561 1.25 1.25zm-3.75 1.25c-.691 0-1.25.561-1.25 1.25s.559 1.25 1.25 1.25 1.25-.561 1.25-1.25-.559-1.25-1.25-1.25zm8.75-1.25c0 .689-.559 1.25-1.25 1.25s-1.25-.561-1.25-1.25.559-1.25 1.25-1.25 1.25.561 1.25 1.25zm-3.75 1.25c-.691 0-1.25.561-1.25 1.25s.559 1.25 1.25 1.25 1.25-.561 1.25-1.25-.559-1.25-1.25-1.25zm-6.25-1.25c0 .689-.559 1.25-1.25 1.25s-1.25-.561-1.25-1.25.559-1.25 1.25-1.25 1.25.561 1.25 1.25zm-3.75 1.25c-.691 0-1.25.561-1.25 1.25s.559 1.25 1.25 1.25 1.25-.561 1.25-1.25-.559-1.25-1.25-1.25zm15.172-11.984c-.178-3.232-3.031-5.777-6.432-5.491-1.087-1.24-2.693-2.025-4.49-2.025-3.172 0-5.754 2.443-5.922 5.516-2.033.359-3.578 2.105-3.578 4.206 0 2.362 1.949 4.278 4.354 4.278h1.326c.771 1.198 2.124 2 3.674 2h10.291c2.406 0 4.355-1.916 4.355-4.278 0-2.101-1.545-3.847-3.578-4.206zm-15.395 4.484h-.673c-1.297 0-2.354-1.021-2.354-2.278 0-2.118 2.104-2.597 3.488-2.513-.05-1.355.137-5.209 4.012-5.209.967 0 1.714.25 2.29.645-1.823.921-3.096 2.745-3.212 4.871-2.022.357-3.697 2.127-3.551 4.484zm14.618 2h-10.291c-1.297 0-2.354-1.021-2.354-2.278 0-2.118 2.104-2.597 3.488-2.513-.05-1.355.137-5.209 4.012-5.209 3.771 0 4.229 3.771 4.012 5.209 1.509-.105 3.488.437 3.488 2.513 0 1.257-1.057 2.278-2.355 2.278z" />
@@ -273,6 +281,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className={getSizeClasses(size)}
+          fill="currentColor"
           viewBox="0 0 24 24"
         >
           <path d="M15.787 7.531c-5.107 2.785-12.72 9.177-15.787 15.469h2.939c.819-2.021 2.522-4.536 3.851-5.902 8.386 3.747 17.21-2.775 17.21-11.343 0-1.535-.302-3.136-.92-4.755-2.347 3.119-5.647 1.052-10.851 1.625-7.657.844-11.162 6.797-8.764 11.54 3.506-3.415 9.523-6.38 12.322-6.634z" />
@@ -282,7 +291,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className={getSizeClasses(size)}
-          fill="none"
+          fill="currentColor"
           viewBox="0 0 24 24"
           stroke="currentColor"
         >
@@ -297,6 +306,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       key: (
         <svg
           className={getSizeClasses(size)}
+          fill="currentColor"
           xmlns="http://www.w3.org/2000/svg"
           fill-rule="evenodd"
           clip-rule="evenodd"

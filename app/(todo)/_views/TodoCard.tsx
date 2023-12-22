@@ -186,6 +186,7 @@ const TodoCard = () => {
               <Button
                 state="error"
                 icon="cancel"
+                outline
                 onClick={() => handleCancel()}
               >
                 Cancel
