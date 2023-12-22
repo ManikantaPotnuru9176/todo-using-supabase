@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/app/_components/Button";
+import { Button } from "@/app/_components/Button";
 import Input from "@/app/_components/Input";
 import TodoItem from "@/app/(todo)/_components/TodoItem";
 import { deleteData } from "@/app/_supabase/delete";
@@ -133,7 +133,8 @@ const TodoCard = () => {
         <div className="flex flex-row justify-between space-x-4">
           <Input val={input} onInputChange={handleInputChange} />
           <Button
-            className="btn-neutral btn-outline btn-md"
+            variant="outline"
+            // className="btn-neutral btn-outline btn-md"
             onClick={() => addTodo()}
           >
             Add Task

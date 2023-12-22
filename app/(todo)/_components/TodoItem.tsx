@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../../_components/Button";
+import { Button } from "@/app/_components/Button";
 
 const TodoItem = (props: {
   id: any;
