@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/app/_components/Button";
-import Input from "@/app/_components/Input";
+import { Input } from "@/app/_components/Input";
 import TodoItem from "@/app/(todo)/_components/TodoItem";
 import { deleteData } from "@/app/_supabase/delete";
 import { getData } from "@/app/_supabase/get";
@@ -132,7 +132,13 @@ const TodoCard = () => {
         }`}
       >
         <div className="flex flex-row justify-between space-x-4">
-          <Input val={input} onInputChange={handleInputChange} />
+          <Input
+            variant="neutral"
+            placeholder="Enter task"
+            bordered
+            value={input}
+            onChange={handleInputChange}
+          />
           <Button
             variant="neutral"
             size="medium"
@@ -180,7 +186,13 @@ const TodoCard = () => {
       <dialog id="my_modal_5" open={isEditMode} className="modal modal-middle">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Edit the data</h3>
-          <Input val={updateInput} onInputChange={handleUpadteInputChange} />
+          <Input
+            variant="neutral"
+            placeholder="Enter task"
+            bordered
+            value={updateInput}
+            onChange={handleUpadteInputChange}
+          />
           <div className="modal-action">
             <form method="dialog" className="space-x-2">
               <Button
