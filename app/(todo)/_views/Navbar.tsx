@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { getData } from "@/app/_supabase/_todo/get";
-import { updateData } from "@/app/_supabase/_todo/update";
-import useTodoStore from "@/app/_zustand/_todo/todoStore";
+import { getData } from "@/app/_supabase/get";
+import { updateData } from "@/app/_supabase/update";
+import useTodoStore from "@/app/(todo)/_zustand/todoStore";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 

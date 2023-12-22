@@ -1,6 +1,6 @@
 "use client";
 
-import useTodoStore from "../_zustand/_todo/todoStore";
+import useTodoStore from "../(todo)/_zustand/todoStore";
 
 export default function CustomThemeController({
   children,

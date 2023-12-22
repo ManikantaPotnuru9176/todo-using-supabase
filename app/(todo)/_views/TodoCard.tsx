@@ -1,15 +1,15 @@
 "use client";
 
-import Button from "@/app/_components/_todo/Button";
-import Input from "@/app/_components/_todo/Input";
-import TodoItem from "@/app/_components/_todo/TodoItem";
-import { deleteData } from "@/app/_supabase/_todo/delete";
-import { getData } from "@/app/_supabase/_todo/get";
-import { insertData } from "@/app/_supabase/_todo/insert";
-import { updateData } from "@/app/_supabase/_todo/update";
+import Button from "@/app/(todo)/_components/Button";
+import Input from "@/app/(todo)/_components/Input";
+import TodoItem from "@/app/(todo)/_components/TodoItem";
+import { deleteData } from "@/app/_supabase/delete";
+import { getData } from "@/app/_supabase/get";
+import { insertData } from "@/app/_supabase/insert";
+import { updateData } from "@/app/_supabase/update";
 import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import useTodoStore from "@/app/_zustand/_todo/todoStore";
+import useTodoStore from "@/app/(todo)/_zustand/todoStore";
 
 const TodoCard = () => {
   const queryClient = useQueryClient();

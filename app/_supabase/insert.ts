@@ -1,4 +1,4 @@
-import supabase from "@/app/_utils/_todo/supabase";
+import supabase from "@/app/_utils/supabase";
 
 export const insertData = async (tableName: string, newData: object) => {
   try {
