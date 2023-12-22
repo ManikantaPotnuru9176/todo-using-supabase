@@ -86,6 +86,7 @@ const TodoCard = () => {
   });
 
   const addTodo = () => {
+    if (input.trim() === "") return;
     insertMutation.mutate({ task: input, completed: false });
     setInput("");
   };
