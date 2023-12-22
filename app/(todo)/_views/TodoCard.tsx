@@ -137,6 +137,7 @@ const TodoCard = () => {
             variant="neutral"
             size="medium"
             outline
+            icon="add"
             onClick={() => addTodo()}
           >
             Add Task
