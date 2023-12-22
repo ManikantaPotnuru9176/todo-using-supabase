@@ -6,6 +6,7 @@ import { updateData } from "@/app/_supabase/update";
 import useTodoStore from "@/app/(todo)/_zustand/todoStore";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
+import supabase from "@/app/_utils/supabase";
 
 const Navbar = () => {
   const themes = [
@@ -68,6 +69,20 @@ const Navbar = () => {
     const updatedData = { updatedData: newData };
     updateMutation.mutate(updatedData);
   };
+
+  const handleChange = (payload: object) => {
+    console.log("Change received!", payload);
+    queryClient.invalidateQueries({ queryKey: ["theme"] });
+  };
+
+  supabase
+    .channel("theme")
+    .on(
+      "postgres_changes",
+      { event: "*", schema: "public", table: "theme" },
+      handleChange
+    )
+    .subscribe();
 
   return (
     <div className="navbar bg-base-100 px-2 md:px-10 lg:px-28 sticky top-0 z-20 bg-opacity-80">

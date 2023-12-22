@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import CustomThemeController from "./_providers/CustomThemeController";
+import CustomThemeController from "./(todo)/_providers/CustomThemeController";
 import { ReactQueryProvider } from "./_providers/ReactQueryProvider";
 
 export const metadata: Metadata = {

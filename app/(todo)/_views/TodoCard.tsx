@@ -10,6 +10,7 @@ import { updateData } from "@/app/_supabase/update";
 import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import useTodoStore from "@/app/(todo)/_zustand/todoStore";
+import supabase from "@/app/_utils/supabase";
 
 const TodoCard = () => {
   const queryClient = useQueryClient();
@@ -122,6 +123,20 @@ const TodoCard = () => {
     setUpdateInput("");
     setEditId(-1);
   };
+
+  const handleChange = (payload: object) => {
+    console.log("Change received!", payload);
+    queryClient.invalidateQueries({ queryKey: ["TodoData"] });
+  };
+
+  const subscription = supabase
+    .channel("todos")
+    .on(
+      "postgres_changes",
+      { event: "*", schema: "public", table: "todos" },
+      handleChange
+    )
+    .subscribe();
 
   return (
     <div className="card bg-base-100 shadow-xl items-center mt-4 min-w-fit">
