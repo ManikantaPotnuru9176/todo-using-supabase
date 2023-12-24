@@ -12,7 +12,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import useTodoStore from "@/app/(todo)/_zustand/todoStore";
 import supabase from "@/app/_utils/supabase";
 
-const TodoCard = () => {
+const TodoView = () => {
   const queryClient = useQueryClient();
 
   const {
@@ -233,4 +233,4 @@ const TodoCard = () => {
   );
 };
 
-export default TodoCard;
+export default TodoView;

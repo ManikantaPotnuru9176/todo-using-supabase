@@ -1,4 +1,4 @@
-import TodoCard from "../../_views/TodoCard";
+import TodoCard from "../../_views/TodoView";
 
 export default function Home() {
   return (
