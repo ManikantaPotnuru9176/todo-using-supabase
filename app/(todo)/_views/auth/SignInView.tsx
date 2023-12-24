@@ -6,7 +6,7 @@ import { Button } from "@/app/_components/Button";
 import { Input } from "@/app/_components/Input";
 import { useMutation } from "@tanstack/react-query";
 import { signInUser } from "@/app/_supabase/_auth/signin";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const SignInView = () => {
   const [email, setEmail] = useState("");

@@ -7,7 +7,7 @@ import { Button } from "@/app/_components/Button";
 import { Input } from "@/app/_components/Input";
 import { signUpUser } from "@/app/_supabase/_auth/signup";
 import { insertData } from "@/app/_supabase/insert";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const SignUpView = () => {
   const [email, setEmail] = useState("");
@@ -46,7 +46,7 @@ const SignUpView = () => {
       if (data && data.user) {
         insertThemeMutation.mutate({ theme: "light", user_id: data.user.id });
         console.log("SignUp Data: ", data);
-        router.push("login")
+        router.push("login");
       } else {
         console.log("Data or user is undefined");
       }

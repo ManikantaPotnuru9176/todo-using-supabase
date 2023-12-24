@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { getData } from "@/app/_supabase/get";
@@ -7,6 +6,8 @@ import useTodoStore from "@/app/(todo)/_zustand/todoStore";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import supabase from "@/app/_utils/supabase";
+import { signOutUser } from "@/app/_supabase/_auth/signout";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const themes = [
@@ -48,6 +49,8 @@ const Navbar = () => {
 
   const queryClient = useQueryClient();
 
+  const router = useRouter();
+
   const { data: themeData, isLoading }: { data: any; isLoading: boolean } =
     useQuery({
       queryKey: ["theme"],
@@ -74,6 +77,20 @@ const Navbar = () => {
   const handleChange = (payload: object) => {
     console.log("Change received!", payload);
     queryClient.invalidateQueries({ queryKey: ["theme"] });
+  };
+
+  const signOutMutation = useMutation({
+    mutationFn: () => signOutUser(),
+    onSuccess: () => {
+      router.push("/auth/login");
+    },
+    onError: () => {
+      console.log("Error while signout!");
+    },
+  });
+
+  const handleSignOut = () => {
+    signOutMutation.mutate();
   };
 
   supabase
@@ -120,11 +137,11 @@ const Navbar = () => {
               />
             </div>
           </div>
-          {/* <ul
+          <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li>
+            {/* <li>
               <a className="justify-between">
                 Profile
                 <span className="badge">New</span>
@@ -132,11 +149,11 @@ const Navbar = () => {
             </li>
             <li>
               <a>Settings</a>
-            </li>
+            </li> */}
             <li>
-              <a>Logout</a>
+              <a onClick={handleSignOut}>Logout</a>
             </li>
-          </ul> */}
+          </ul>
         </div>
       </div>
     </div>

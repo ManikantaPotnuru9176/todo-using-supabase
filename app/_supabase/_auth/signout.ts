@@ -1,6 +1,6 @@
 import supabase from "@/app/_utils/supabase";
 
-export const signInUser = async (email: string, password: string) => {
+export const signOutUser = async () => {
   try {
     const { error } = await supabase.auth.signOut();
 
