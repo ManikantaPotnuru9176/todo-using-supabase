@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 import { Button } from "@/app/_components/Button";
 import { Input } from "@/app/_components/Input";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { signInUser } from "@/app/_supabase/_auth/signin";
 import { useRouter } from "next/navigation";
 
@@ -13,6 +13,8 @@ const SignInView = () => {
   const [password, setPassword] = useState("");
 
   const router = useRouter();
+
+  const queryClient = useQueryClient();
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -27,6 +29,7 @@ const SignInView = () => {
       signInUser(formData.email, formData.password),
     onSuccess: (data) => {
       console.log("SignIn Data: ", data);
+      queryClient.invalidateQueries({ queryKey: ["theme"] });
       router.push("/");
     },
     onError: () => {

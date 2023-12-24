@@ -64,8 +64,6 @@ const Navbar = () => {
     select: (data) => data.data.user,
   });
 
-  console.log("User: ", user);
-
   if (themeData && themeData.length && themeData.at(0).theme !== theme) {
     setTheme(themeData.at(0).theme);
   }
@@ -91,6 +89,7 @@ const Navbar = () => {
   const signOutMutation = useMutation({
     mutationFn: () => signOutUser(),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["userData"] });
       router.push("/auth/login");
     },
     onError: () => {
