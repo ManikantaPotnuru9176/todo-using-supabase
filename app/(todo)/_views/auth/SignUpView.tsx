@@ -6,6 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import { Button } from "@/app/_components/Button";
 import { Input } from "@/app/_components/Input";
 import { signUpUser } from "@/app/_supabase/_auth/signup";
+import { insertData } from "@/app/_supabase/insert";
 
 const SignUpView = () => {
   const [email, setEmail] = useState("");
@@ -24,14 +25,30 @@ const SignUpView = () => {
     setConfirmPassword(e.target.value);
   };
 
+  const insertThemeMutation = useMutation({
+    mutationFn: (newTheme: { theme: string; user_id: string }) =>
+      insertData("theme", newTheme),
+    onSuccess: () => {
+      console.log("Theme created successfully!");
+    },
+    onError: () => {
+      console.log("Error while creating theme!");
+    },
+  });
+
   const signUpMutation = useMutation({
     mutationFn: (formData: { email: string; password: string }) =>
       signUpUser(formData.email, formData.password),
     onSuccess: (data) => {
-      console.log(data);
+      if (data && data.user) {
+        insertThemeMutation.mutate({ theme: "light", user_id: data.user.id });
+        console.log("SignUp Data: ", data);
+      } else {
+        console.log("Data or user is undefined");
+      }
     },
     onError: () => {
-      console.log("Error while regiter!");
+      console.log("Error while registering!");
     },
   });
 

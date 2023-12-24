@@ -34,8 +34,6 @@ const TodoView = () => {
     select: (data) => data.data.user,
   });
 
-  console.log("User: ", user);
-
   const { data: todos, isLoading }: { data: any; isLoading: boolean } =
     useQuery({
       queryKey: ["TodoData"],
