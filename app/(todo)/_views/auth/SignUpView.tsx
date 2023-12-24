@@ -7,11 +7,14 @@ import { Button } from "@/app/_components/Button";
 import { Input } from "@/app/_components/Input";
 import { signUpUser } from "@/app/_supabase/_auth/signup";
 import { insertData } from "@/app/_supabase/insert";
+import { useRouter } from "next/router";
 
 const SignUpView = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const router = useRouter();
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -43,6 +46,7 @@ const SignUpView = () => {
       if (data && data.user) {
         insertThemeMutation.mutate({ theme: "light", user_id: data.user.id });
         console.log("SignUp Data: ", data);
+        router.push("login")
       } else {
         console.log("Data or user is undefined");
       }

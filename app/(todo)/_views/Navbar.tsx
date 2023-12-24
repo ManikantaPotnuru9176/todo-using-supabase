@@ -48,18 +48,19 @@ const Navbar = () => {
 
   const queryClient = useQueryClient();
 
-  const { data, isLoading }: { data: any; isLoading: boolean } = useQuery({
-    queryKey: ["theme"],
-    queryFn: () => getData("theme", "*"),
-  });
+  const { data: themeData, isLoading }: { data: any; isLoading: boolean } =
+    useQuery({
+      queryKey: ["theme"],
+      queryFn: () => getData("theme", "*"),
+    });
 
-  if (data && data.at(0).theme !== theme) {
-    setTheme(data.at(0).theme);
+  if (themeData && themeData.length && themeData.at(0).theme !== theme) {
+    setTheme(themeData.at(0).theme);
   }
 
   const updateMutation = useMutation({
     mutationFn: ({ updatedData }: { updatedData: object }) =>
-      updateData("theme", updatedData, 1),
+      updateData("theme", updatedData, themeData?.at(0)?.id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["theme"] });
     },

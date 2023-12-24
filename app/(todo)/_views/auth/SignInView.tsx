@@ -6,10 +6,13 @@ import { Button } from "@/app/_components/Button";
 import { Input } from "@/app/_components/Input";
 import { useMutation } from "@tanstack/react-query";
 import { signInUser } from "@/app/_supabase/_auth/signin";
+import { useRouter } from "next/router";
 
 const SignInView = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const router = useRouter();
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -23,7 +26,8 @@ const SignInView = () => {
     mutationFn: (formData: { email: string; password: string }) =>
       signInUser(formData.email, formData.password),
     onSuccess: (data) => {
-      console.log(data);
+      console.log("SignIn Data: ", data);
+      router.push("/");
     },
     onError: () => {
       console.log("Error while regiter!");
