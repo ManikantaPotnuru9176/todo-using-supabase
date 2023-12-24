@@ -51,7 +51,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     ref
   ) => {
     const variants = {
-      default: "w-full max-w-xs",
+      default: "w-full",
       neutral: "input-neutral",
       primary: "input-primary",
       secondary: "input-secondary",
