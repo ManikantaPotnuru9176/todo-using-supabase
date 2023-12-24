@@ -139,14 +139,16 @@ const TodoView = () => {
     queryClient.invalidateQueries({ queryKey: ["TodoData"] });
   };
 
-  const subscription = supabase
-    .channel("todos")
-    .on(
-      "postgres_changes",
-      { event: "*", schema: "public", table: "todos" },
-      handleChange
-    )
-    .subscribe();
+  const subscription =
+    user &&
+    supabase
+      .channel("todos")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "todos" },
+        handleChange
+      )
+      .subscribe();
 
   return (
     <div className="card bg-base-100 shadow-xl items-center mt-4 min-w-fit">

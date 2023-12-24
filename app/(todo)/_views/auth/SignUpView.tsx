@@ -46,7 +46,7 @@ const SignUpView = () => {
       if (data && data.user) {
         insertThemeMutation.mutate({ theme: "light", user_id: data.user.id });
         console.log("SignUp Data: ", data);
-        router.push("login");
+        router.push("/auth/login");
       } else {
         console.log("Data or user is undefined");
       }
