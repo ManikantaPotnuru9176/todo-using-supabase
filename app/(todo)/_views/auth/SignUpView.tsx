@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 
 import { Button } from "@/app/_components/Button";
 import { Input } from "@/app/_components/Input";
+import { signUpUser } from "@/app/_supabase/_auth/signup";
 
 const SignUpView = () => {
   const [email, setEmail] = useState("");
@@ -22,8 +24,20 @@ const SignUpView = () => {
     setConfirmPassword(e.target.value);
   };
 
-  const onSubmit = (e: any) => {
-    e.preventdefault();
+  const signUpMutation = useMutation({
+    mutationFn: (formData: { email: string; password: string }) =>
+      signUpUser(formData.email, formData.password),
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: () => {
+      console.log("Error while regiter!");
+    },
+  });
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    signUpMutation.mutate({ email, password });
   };
 
   return (
@@ -74,7 +88,7 @@ const SignUpView = () => {
               Confirm password
             </label>
             <Input
-              type="confirm-password"
+              type="password"
               name="confirm-password"
               id="confirm-password"
               placeholder="••••••••"

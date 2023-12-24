@@ -1,4 +1,6 @@
 "use client";
+import React, { useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { Button } from "@/app/_components/Button";
 import { Input } from "@/app/_components/Input";
@@ -7,8 +9,6 @@ import { deleteData } from "@/app/_supabase/delete";
 import { getData } from "@/app/_supabase/get";
 import { insertData } from "@/app/_supabase/insert";
 import { updateData } from "@/app/_supabase/update";
-import React, { useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import useTodoStore from "@/app/(todo)/_zustand/todoStore";
 import supabase from "@/app/_utils/supabase";
 
@@ -28,14 +28,26 @@ const TodoView = () => {
     setLoading,
   } = useTodoStore();
 
-  const { data, isLoading }: { data: any; isLoading: boolean } = useQuery({
-    queryKey: ["TodoData"],
-    queryFn: () => getData("todos", "*"),
+  const { data: user }: { data: any } = useQuery({
+    queryKey: ["userData"],
+    queryFn: () => supabase.auth.getUser(),
+    select: (data) => data.data.user,
   });
 
+  console.log("User: ", user);
+
+  const { data: todos, isLoading }: { data: any; isLoading: boolean } =
+    useQuery({
+      queryKey: ["TodoData"],
+      queryFn: () => getData("todos", "*"),
+    });
+
   const insertMutation = useMutation({
-    mutationFn: (newTodo: { task: string; completed: boolean }) =>
-      insertData("todos", newTodo),
+    mutationFn: (newTodo: {
+      task: string;
+      completed: boolean;
+      user_id: string;
+    }) => insertData("todos", newTodo),
     onMutate: () => {
       setLoading(true);
     },
@@ -88,7 +100,7 @@ const TodoView = () => {
 
   const addTodo = () => {
     if (input.trim() === "") return;
-    insertMutation.mutate({ task: input, completed: false });
+    insertMutation.mutate({ task: input, completed: false, user_id: user.id });
     setInput("");
   };
 
@@ -172,7 +184,7 @@ const TodoView = () => {
           </div>
         ) : (
           <div className="flex-col space-y-3">
-            {data?.map(
+            {todos?.map(
               (todo: {
                 id: React.Key | null | undefined;
                 task: string;

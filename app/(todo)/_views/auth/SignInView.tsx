@@ -1,18 +1,46 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 import { Button } from "@/app/_components/Button";
 import { Input } from "@/app/_components/Input";
+import { useMutation } from "@tanstack/react-query";
+import { signInUser } from "@/app/_supabase/_auth/signin";
 
 const SignInView = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+  const signInMutation = useMutation({
+    mutationFn: (formData: { email: string; password: string }) =>
+      signInUser(formData.email, formData.password),
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: () => {
+      console.log("Error while regiter!");
+    },
+  });
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    signInMutation.mutate({ email, password });
+  };
+
   return (
     <div className="card card-compact w-96 bg-base-100 shadow-xl pt-2 md:pt-10">
       <div className="card-body">
         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
           Sign in to your account
         </h1>
-        <form className="space-y-4 md:space-y-6">
+        <form className="space-y-4 md:space-y-6" onSubmit={onSubmit}>
           <div>
             <label htmlFor="email" className="block mb-2 text-sm font-medium">
               Your email
@@ -23,6 +51,8 @@ const SignInView = () => {
               id="email"
               bordered
               placeholder="name@company.com"
+              value={email}
+              onChange={handleEmailChange}
               required
             />
           </div>
@@ -38,6 +68,8 @@ const SignInView = () => {
               name="password"
               id="password"
               placeholder="••••••••"
+              value={password}
+              onChange={handlePasswordChange}
               bordered
               required
             />
