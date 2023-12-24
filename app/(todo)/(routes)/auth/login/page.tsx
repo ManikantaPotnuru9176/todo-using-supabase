@@ -4,9 +4,9 @@ import React from "react";
 
 const Login = () => {
   return (
-    <div className="flex justify-center align-center pt-2 md:pt-10">
-      <div className="card bg-base-100 shadow-xl items-center">
-        <div className="card-body py-4 px-8 min-w-[30vw]">
+    <div className="flex justify-center">
+      <div className="card card-compact w-96 bg-base-100 shadow-xl pt-2 md:pt-10">
+        <div className="card-body">
           <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
             Sign in to your account
           </h1>
@@ -40,7 +40,7 @@ const Login = () => {
                 required
               />
             </div>
-            <div className="card-actions justify-end">
+            <div className="card-actions">
               <Button
                 type="submit"
                 variant="accent"
