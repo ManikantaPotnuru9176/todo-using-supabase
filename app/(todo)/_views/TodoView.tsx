@@ -170,9 +170,7 @@ const TodoView = () => {
             variant="neutral"
             size="medium"
             outline
-            icon="add"
-            iconAtRight
-            noAnimation
+            disabled
             onClick={() => addTodo()}
           >
             Add Task
@@ -222,17 +220,11 @@ const TodoView = () => {
           />
           <div className="modal-action">
             <form method="dialog" className="space-x-2">
-              <Button
-                state="error"
-                icon="cancel"
-                outline
-                onClick={() => handleCancel()}
-              >
+              <Button state="error" outline onClick={() => handleCancel()}>
                 Cancel
               </Button>
               <Button
                 state="success"
-                icon="update"
                 onClick={() => updateTodo(editId, { task: updateInput })}
               >
                 Update

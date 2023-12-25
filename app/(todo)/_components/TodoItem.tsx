@@ -24,18 +24,12 @@ const TodoItem = (props: {
         <Button
           state="info"
           size="small"
-          icon="edit"
           outline
           onClick={() => onEdit(id, task)}
         >
           Edit
         </Button>
-        <Button
-          state="error"
-          size="small"
-          icon="delete"
-          onClick={() => onDelete(id)}
-        >
+        <Button state="error" size="small" onClick={() => onDelete(id)}>
           Delete
         </Button>
       </div>
