@@ -4,9 +4,10 @@ import React, { useState } from "react";
 
 import { Button } from "@/app/_components/Button";
 import { Input } from "@/app/_components/Input";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { signInUser } from "@/app/_supabase/_auth/signin";
 import { useRouter } from "next/navigation";
+import supabase from "@/app/_utils/supabase";
 
 const SignInView = () => {
   const [email, setEmail] = useState("");
@@ -24,12 +25,23 @@ const SignInView = () => {
     setPassword(e.target.value);
   };
 
+  const { data: user }: { data: any } = useQuery({
+    queryKey: ["userDataSignIn"],
+    queryFn: () => supabase.auth.getUser(),
+    select: (data) => data.data.user,
+  });
+
+  if (user) router.push("/");
+
   const signInMutation = useMutation({
     mutationFn: (formData: { email: string; password: string }) =>
       signInUser(formData.email, formData.password),
     onSuccess: (data) => {
       console.log("SignIn Data: ", data);
       queryClient.invalidateQueries({ queryKey: ["theme"] });
+      queryClient.invalidateQueries({ queryKey: ["userData"] });
+      setEmail("");
+      setPassword("");
       router.push("/");
     },
     onError: () => {

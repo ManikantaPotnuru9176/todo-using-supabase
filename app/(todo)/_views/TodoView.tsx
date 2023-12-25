@@ -29,7 +29,7 @@ const TodoView = () => {
   } = useTodoStore();
 
   const { data: user }: { data: any } = useQuery({
-    queryKey: ["userData"],
+    queryKey: ["userDataTodo"],
     queryFn: () => supabase.auth.getUser(),
     select: (data) => data.data.user,
   });
