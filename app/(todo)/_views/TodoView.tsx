@@ -10,7 +10,7 @@ import { getData } from "@/app/_supabase/get";
 import { insertData } from "@/app/_supabase/insert";
 import { updateData } from "@/app/_supabase/update";
 import useTodoStore from "@/app/(todo)/_zustand/todoStore";
-import supabase from "@/app/_utils/supabase";
+import supabase from "@/utils/supabase";
 
 const TodoView = () => {
   const queryClient = useQueryClient();

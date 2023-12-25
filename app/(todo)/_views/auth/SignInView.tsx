@@ -7,7 +7,7 @@ import { Input } from "@/app/_components/Input";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { signInUser } from "@/app/_supabase/_auth/signin";
 import { useRouter } from "next/navigation";
-import supabase from "@/app/_utils/supabase";
+import supabase from "@/utils/supabase";
 
 const SignInView = () => {
   const [email, setEmail] = useState("");

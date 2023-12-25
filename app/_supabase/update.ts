@@ -1,4 +1,4 @@
-import supabase from "@/app/_utils/supabase";
+import supabase from "@/utils/supabase";
 
 export const updateData = async (
   tableName: string,

@@ -19,7 +19,7 @@
 //-------------------------------------------------------------------------------------
 
 import * as React from "react";
-import { cn } from "../_utils/cn";
+import { cn } from "../../utils/cn";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
