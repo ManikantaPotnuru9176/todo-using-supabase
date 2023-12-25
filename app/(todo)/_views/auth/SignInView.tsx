@@ -98,7 +98,6 @@ const SignInView = () => {
             <Button
               type="submit"
               variant="accent"
-              icon="signin"
               outline
               className="w-full"
             >
