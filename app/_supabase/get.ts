@@ -1,4 +1,4 @@
-import supabase from "@/utils/supabase";
+import supabase from "@/app/_utils/supabase";
 
 export const getData = async (tableName: string, columnNames: string) => {
   try {

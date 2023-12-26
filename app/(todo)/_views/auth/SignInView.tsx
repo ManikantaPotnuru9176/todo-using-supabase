@@ -7,7 +7,7 @@ import { Input } from "@/app/_components/Input";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { signInUser } from "@/app/_supabase/_auth/signin";
 import { useRouter } from "next/navigation";
-import supabase from "@/utils/supabase";
+import supabase from "@/app/_utils/supabase";
 
 const SignInView = () => {
   const [email, setEmail] = useState("");
@@ -95,12 +95,7 @@ const SignInView = () => {
             />
           </div>
           <div className="card-actions">
-            <Button
-              type="submit"
-              variant="accent"
-              outline
-              className="w-full"
-            >
+            <Button type="submit" variant="accent" outline className="w-full">
               Sign in
             </Button>
           </div>

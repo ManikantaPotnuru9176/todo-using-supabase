@@ -5,7 +5,7 @@ import { updateData } from "@/app/_supabase/update";
 import useTodoStore from "@/app/(todo)/_zustand/todoStore";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import supabase from "@/utils/supabase";
+import supabase from "@/app/_utils/supabase";
 import { signOutUser } from "@/app/_supabase/_auth/signout";
 import { useRouter } from "next/navigation";
 import { Button } from "@/app/_components/Button";

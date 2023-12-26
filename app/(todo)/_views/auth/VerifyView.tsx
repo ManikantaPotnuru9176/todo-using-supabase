@@ -1,8 +1,5 @@
-import { Button } from "@/app/_components/Button";
-import { cn } from "@/app/_utils/cn";
 import React from "react";
 
-// VerifyView component
 const VerifyView = () => {
   return (
     <div className="card card-compact w-96 bg-base-100 shadow-xl mt-20">

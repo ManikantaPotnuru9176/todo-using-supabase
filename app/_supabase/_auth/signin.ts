@@ -1,4 +1,4 @@
-import supabase from "@/utils/supabase";
+import supabase from "@/app/_utils/supabase";
 
 export const signInUser = async (email: string, password: string) => {
   try {
