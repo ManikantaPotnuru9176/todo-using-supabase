@@ -1,57 +1,11 @@
-// import React from "react";
-
-// const Input = (props: { val: string; onInputChange: Function }) => {
-//   const { val, onInputChange } = props;
-
-//   return (
-//     <input
-//       type="text"
-//       placeholder="Type task"
-//       className="input input-bordered w-full"
-//       value={val}
-//       onChange={(e) => onInputChange(e)}
-//     />
-//   );
-// };
-
-// export default Input;
-
-//-------------------------------------------------------------------------------------
-
 import * as React from "react";
-import { cn } from "../../utils/cn";
+import { cn } from "@/utils/cn";
+import { VariantProps, cva } from "class-variance-authority";
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
-  variant?:
-    | "default"
-    | "neutral"
-    | "primary"
-    | "secondary"
-    | "accent"
-    | "ghost"
-    | "info"
-    | "success"
-    | "warning"
-    | "error";
-  bordered?: boolean;
-  inputSize?: "default" | "extrasmall" | "small" | "medium" | "large";
-}
-
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  (
-    {
-      className,
-      variant = "default",
-      bordered = false,
-      inputSize = "default",
-      children,
-      ...props
-    },
-    ref
-  ) => {
-    const variants = {
-      default: "w-full",
+const inputVariants = cva(["input", "w-full"], {
+  variants: {
+    variant: {
+      default: "",
       neutral: "input-neutral",
       primary: "input-primary",
       secondary: "input-secondary",
@@ -61,28 +15,53 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       success: "input-success",
       warning: "input-warning",
       error: "input-error",
-    };
+    },
 
-    const sizes = {
+    size: {
       default: "input-md",
       extrasmall: "input-xs",
       small: "input-sm",
       medium: "input-md",
       large: "input-lg",
-    };
+    },
 
-    const inputClassName = cn(
-      "input w-full",
-      variants[variant],
-      { "input-bordered": bordered },
-      sizes[inputSize],
-      className
+    bordered: {
+      true: "input-bordered",
+    },
+
+    disabled: {
+      true: true,
+    },
+  },
+});
+
+export interface InputProps
+  extends Omit<
+      React.InputHTMLAttributes<HTMLInputElement>,
+      "disabled" | "size"
+    >,
+    VariantProps<typeof inputVariants> {}
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, variant, size, bordered, disabled, ...props }, ref) => {
+    return (
+      <input
+        className={cn(
+          inputVariants({
+            variant,
+            size,
+            bordered,
+            className,
+          })
+        )}
+        disabled={!!disabled}
+        ref={ref}
+        {...props}
+      />
     );
-
-    return <input className={inputClassName} ref={ref} {...props} />;
   }
 );
 
 Input.displayName = "Input";
 
-export { Input };
+export { Input, inputVariants };

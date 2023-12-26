@@ -96,13 +96,15 @@ const TodoView = () => {
     },
   });
 
-  const addTodo = () => {
+  const addTodo = (e: React.FormEvent) => {
+    e.preventDefault();
     if (input.trim() === "") return;
     insertMutation.mutate({ task: input, completed: false, user_id: user.id });
     setInput("");
   };
 
-  const updateTodo = (id: number, newData: object) => {
+  const updateTodo = (e: React.FormEvent, id: number, newData: object) => {
+    e.preventDefault();
     const updatedData = { id, updatedData: newData };
     updateMutation.mutate(updatedData);
     setInput("");
@@ -158,7 +160,10 @@ const TodoView = () => {
           isEditMode && "blur-sm"
         }`}
       >
-        <div className="flex flex-row justify-between space-x-4">
+        <form
+          className="flex flex-row justify-between space-x-4"
+          onSubmit={addTodo}
+        >
           <Input
             variant="neutral"
             placeholder="Enter task"
@@ -166,16 +171,10 @@ const TodoView = () => {
             value={input}
             onChange={handleInputChange}
           />
-          <Button
-            variant="neutral"
-            size="medium"
-            outline
-            disabled
-            onClick={() => addTodo()}
-          >
+          <Button type="submit" variant="neutral" size="medium" outline>
             Add Task
           </Button>
-        </div>
+        </form>
         {isLoading ? (
           <div className="flex justify-center">
             <span className="loading loading-bars loading-lg my-16" />
@@ -210,27 +209,27 @@ const TodoView = () => {
       </div>
       <dialog id="my_modal_5" open={isEditMode} className="modal modal-middle">
         <div className="modal-box">
-          <h3 className="font-bold text-lg">Edit the data</h3>
-          <Input
-            variant="neutral"
-            placeholder="Enter task"
-            bordered
-            value={updateInput}
-            onChange={handleUpadteInputChange}
-          />
-          <div className="modal-action">
-            <form method="dialog" className="space-x-2">
+          <form
+            method="dialog"
+            onSubmit={(e) => updateTodo(e, editId, { task: updateInput })}
+          >
+            <h3 className="font-bold text-lg">Edit the data</h3>
+            <Input
+              variant="neutral"
+              placeholder="Enter task"
+              bordered
+              value={updateInput}
+              onChange={handleUpadteInputChange}
+            />
+            <div className="modal-action">
               <Button state="error" outline onClick={() => handleCancel()}>
                 Cancel
               </Button>
-              <Button
-                state="success"
-                onClick={() => updateTodo(editId, { task: updateInput })}
-              >
+              <Button type="submit" state="success">
                 Update
               </Button>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
       </dialog>
     </div>
