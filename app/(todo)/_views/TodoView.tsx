@@ -222,7 +222,12 @@ const TodoView = () => {
               onChange={handleUpadteInputChange}
             />
             <div className="modal-action">
-              <Button state="error" outline onClick={() => handleCancel()}>
+              <Button
+                type="button"
+                state="error"
+                outline
+                onClick={() => handleCancel()}
+              >
                 Cancel
               </Button>
               <Button type="submit" state="success">
