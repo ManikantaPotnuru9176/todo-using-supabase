@@ -5,6 +5,9 @@ export const signUpUser = async (email: string, password: string) => {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        emailRedirectTo: process.env.NEXT_PUBLIC_REDIRECTION_URL,
+      },
     });
 
     return data;
