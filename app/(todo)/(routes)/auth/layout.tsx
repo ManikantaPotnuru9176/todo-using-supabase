@@ -1,4 +1,4 @@
-import Navbar from "./_views/Navbar";
+import NavbarSimple from "../../_views/NavbarSimple";
 
 export default function RootLayout({
   children,
@@ -7,7 +7,7 @@ export default function RootLayout({
 }) {
   return (
     <div className="flex min-h-full flex-col">
-      <Navbar />
+      <NavbarSimple />
       <div className="grow">{children}</div>
     </div>
   );

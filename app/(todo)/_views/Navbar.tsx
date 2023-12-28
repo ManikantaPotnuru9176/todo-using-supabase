@@ -114,7 +114,7 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-100 px-2 md:px-10 lg:px-28 sticky top-0 z-20 bg-opacity-80">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl" onClick={() => router.push("/")}>
+        <a className="link link-hover text-2xl font-bold" href="/">
           TODO
         </a>
       </div>
