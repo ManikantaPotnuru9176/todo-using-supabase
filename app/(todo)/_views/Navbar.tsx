@@ -156,6 +156,13 @@ const Navbar = () => {
               <li>
                 <a className="justify-between">{user.email}</a>
               </li>
+              <hr className="h-px my-1 bg-gray-200 border-0" />
+              <li>
+                <a className="justify-between" href="/dashboard">
+                  Dashboard
+                </a>
+              </li>
+              <hr className="h-px my-1 bg-gray-200 border-0" />
               {/* <li>
               <a className="justify-between">
                 Profile

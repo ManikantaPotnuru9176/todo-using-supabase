@@ -16,7 +16,7 @@ const SignUpView = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [success, setSuccess] = useState(true);
+  const [success, setSuccess] = useState(false);
 
   const router = useRouter();
 
