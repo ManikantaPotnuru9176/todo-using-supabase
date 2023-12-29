@@ -1,10 +1,12 @@
+"use client";
+
 import React from "react";
 
 const DashboardMenu = () => {
   return (
     <ul className="menu bg-base-200 lg:menu-horizontal rounded-box fixed bottom-12 z-50 shadow-xl">
       <li>
-        <a>
+        <a href="/dashboard/home">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5"
@@ -23,7 +25,7 @@ const DashboardMenu = () => {
         </a>
       </li>
       <li>
-        <a>
+        <a href="/dashboard/edit">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5"
@@ -40,7 +42,7 @@ const DashboardMenu = () => {
         </a>
       </li>
       <li>
-        <a>
+        <a href="/dashboard/preview">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5"
@@ -54,6 +56,21 @@ const DashboardMenu = () => {
             />
           </svg>
           Preview
+        </a>
+      </li>
+      <div className="flex divide-y bg-primary-content w-px"></div>
+      <li>
+        <a href="/">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            stroke="currentColor"
+          >
+            <path d="M11 21h8.033v-2l1-1v4h-9.033v2l-10-3v-18l10-3v2h9.033v5l-1-1v-3h-8.033v18zm-1 1.656v-21.312l-8 2.4v16.512l8 2.4zm11.086-10.656l-3.293-3.293.707-.707 4.5 4.5-4.5 4.5-.707-.707 3.293-3.293h-9.053v-1h9.053z" />
+          </svg>
+          Exit
         </a>
       </li>
     </ul>

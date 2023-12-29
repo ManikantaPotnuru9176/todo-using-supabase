@@ -15,18 +15,6 @@ const Navbar = () => {
 
   const router = useRouter();
 
-  const { theme, setTheme } = useTodoStore();
-
-  const { data: themeData, isLoading }: { data: any; isLoading: boolean } =
-    useQuery({
-      queryKey: ["theme"],
-      queryFn: () => getData("theme", "*"),
-    });
-
-  if (themeData && themeData.length && themeData.at(0).theme !== theme) {
-    setTheme(themeData.at(0).theme);
-  }
-
   const { data: user }: { data: any } = useQuery({
     queryKey: ["userData"],
     queryFn: () => supabase.auth.getUser(),
@@ -94,7 +82,7 @@ const Navbar = () => {
               </li>
               <hr className="h-px my-1 bg-gray-200 border-0" />
               <li>
-                <a className="justify-between" href="/dashboard">
+                <a className="justify-between" href="/dashboard/home">
                   Dashboard
                 </a>
               </li>

@@ -28,13 +28,8 @@ const Dashboard = () => {
   if (!isLoading && user.role !== "admin") router.push("/");
 
   return (
-    <div>
-      <div className="flex flex-col items-center pt-16">
-        <DashboardHero />
-      </div>
-      <div className="flex flex-col items-center">
-        <DashboardMenu />
-      </div>
+    <div className="flex flex-col items-center">
+      <DashboardMenu />
     </div>
   );
 };
