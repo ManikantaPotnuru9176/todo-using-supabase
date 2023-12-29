@@ -11,46 +11,11 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/app/_components/Button";
 
 const Navbar = () => {
-  const themes = [
-    "light",
-    "dark",
-    "cupcake",
-    "bumblebee",
-    "emerald",
-    "corporate",
-    "synthwave",
-    "retro",
-    "cyberpunk",
-    "valentine",
-    "halloween",
-    "garden",
-    "forest",
-    "aqua",
-    "lofi",
-    "pastel",
-    "fantasy",
-    "wireframe",
-    "black",
-    "luxury",
-    "dracula",
-    "cmyk",
-    "autumn",
-    "business",
-    "acid",
-    "lemonade",
-    "night",
-    "coffee",
-    "winter",
-    "dim",
-    "nord",
-    "sunset",
-  ];
-
-  const { theme, setTheme } = useTodoStore();
-
   const queryClient = useQueryClient();
 
   const router = useRouter();
+
+  const { theme, setTheme } = useTodoStore();
 
   const { data: themeData, isLoading }: { data: any; isLoading: boolean } =
     useQuery({
@@ -58,28 +23,15 @@ const Navbar = () => {
       queryFn: () => getData("theme", "*"),
     });
 
+  if (themeData && themeData.length && themeData.at(0).theme !== theme) {
+    setTheme(themeData.at(0).theme);
+  }
+
   const { data: user }: { data: any } = useQuery({
     queryKey: ["userData"],
     queryFn: () => supabase.auth.getUser(),
     select: (data) => data.data.user,
   });
-
-  if (themeData && themeData.length && themeData.at(0).theme !== theme) {
-    setTheme(themeData.at(0).theme);
-  }
-
-  const updateMutation = useMutation({
-    mutationFn: ({ updatedData }: { updatedData: object }) =>
-      updateData("theme", updatedData, themeData?.at(0)?.id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["theme"] });
-    },
-  });
-
-  const updateTheme = (newData: object) => {
-    const updatedData = { updatedData: newData };
-    updateMutation.mutate(updatedData);
-  };
 
   const handleChange = (payload: object) => {
     console.log("Change received!", payload);
@@ -120,22 +72,6 @@ const Navbar = () => {
       </div>
       {user ? (
         <div className="flex-none">
-          <div className="flex-none">
-            <ul className="menu menu-horizontal px-1">
-              <li>
-                <details>
-                  <summary>{theme ? theme : "Select Theme"}</summary>
-                  <ul className="p-2 bg-base-100 rounded-t-none max-h-[50vh] overflow-x-hidden overflow-y-auto z-30">
-                    {themes.map((theme, index) => (
-                      <li key={index}>
-                        <a onClick={() => updateTheme({ theme })}>{theme}</a>
-                      </li>
-                    ))}
-                  </ul>
-                </details>
-              </li>
-            </ul>
-          </div>
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
