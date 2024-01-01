@@ -9,6 +9,7 @@ import supabase from "@/app/_utils/supabase";
 import { signOutUser } from "@/app/_supabase/_auth/signout";
 import { useRouter } from "next/navigation";
 import { Button } from "@/app/_components/Button";
+import ProtectedNav from "../_components/ProtectedNav";
 
 const Navbar = ({ edit }: { edit: boolean }) => {
   const queryClient = useQueryClient();
@@ -140,12 +141,14 @@ const Navbar = ({ edit }: { edit: boolean }) => {
                 <a className="justify-between">{user.email}</a>
               </li>
               <hr className="h-px my-1 bg-gray-200 border-0" />
-              <li>
-                <a className="justify-between" href="/dashboard/home">
-                  Dashboard
-                </a>
-              </li>
-              <hr className="h-px my-1 bg-gray-200 border-0" />
+              <ProtectedNav>
+                <li>
+                  <a className="justify-between" href="/dashboard/home">
+                    Dashboard
+                  </a>
+                </li>
+                <hr className="h-px my-1 bg-gray-200 border-0" />
+              </ProtectedNav>
               {/* <li>
               <a className="justify-between">
                 Profile
