@@ -179,7 +179,21 @@ const TodoView = ({ edit }: { edit: boolean }) => {
   const updateHeroMutation = useMutation({
     mutationFn: ({ id, updatedData }: { id: number; updatedData: object }) =>
       updateData("todo_hero", updatedData, "hero_id", id),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["TodoHero"] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["TodoHero"] });
+      setTodoHeroData({
+        title: "",
+        update_dialog_title: "",
+        input_placeholder: "",
+        update_input_placeholder: "",
+        add_button_name: "",
+        edit_button_name: "",
+        delete_button_name: "",
+        cancel_button_name: "",
+        update_button_name: "",
+      });
+      setOpen(false);
+    },
   });
 
   const updateTodoHero = (e: React.FormEvent, id: number, newData: object) => {
