@@ -47,7 +47,7 @@ const DashboardHero = () => {
 
   const updateMutation = useMutation({
     mutationFn: ({ updatedData }: { updatedData: object }) =>
-      updateData("theme", updatedData, 10),
+      updateData("theme", updatedData, "id", 10),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["theme"] });
     },
