@@ -7,7 +7,7 @@ export default function RootLayout({
 }) {
   return (
     <div className="flex min-h-full flex-col">
-      <Navbar />
+      <Navbar edit={false} />
       <div className="grow">{children}</div>
     </div>
   );
