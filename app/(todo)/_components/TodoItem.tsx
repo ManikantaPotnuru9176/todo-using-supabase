@@ -8,8 +8,19 @@ const TodoItem = (props: {
   onEdit: Function;
   onDelete: Function;
   onComplete: Function;
+  editButtonName: string;
+  deleteButtonName: string;
 }) => {
-  const { id, task, onEdit, completed, onDelete, onComplete } = props;
+  const {
+    id,
+    task,
+    onEdit,
+    completed,
+    onDelete,
+    onComplete,
+    editButtonName,
+    deleteButtonName,
+  } = props;
 
   return (
     <div role="alert" className={`alert ${completed ? "bg-warning" : ""}`}>
@@ -17,7 +28,7 @@ const TodoItem = (props: {
         type="checkbox"
         className="checkbox checkbox-xs checkbox-success"
         checked={completed}
-        onChange={() => onComplete(id, { completed: !completed })}
+        onChange={(e) => onComplete(e, id, { completed: !completed })}
       />
       <span>{task}</span>
       <div className={`space-x-2 ${completed ? "hidden" : ""}`}>
@@ -27,10 +38,10 @@ const TodoItem = (props: {
           outline
           onClick={() => onEdit(id, task)}
         >
-          Edit
+          {editButtonName}
         </Button>
         <Button state="error" size="small" onClick={() => onDelete(id)}>
-          Delete
+          {deleteButtonName}
         </Button>
       </div>
     </div>

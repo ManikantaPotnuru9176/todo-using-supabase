@@ -1,9 +1,9 @@
-import TodoCard from "../../_views/TodoView";
+import TodoView from "../../_views/TodoView";
 
 export default function Home() {
   return (
     <div className="flex justify-center">
-      <TodoCard />
+      <TodoView edit={false} />
     </div>
   );
 }
