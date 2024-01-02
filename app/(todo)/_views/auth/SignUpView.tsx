@@ -15,6 +15,7 @@ const SignUpView = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordsMatch, setPasswordsMatch] = useState(true);
 
   const [success, setSuccess] = useState(false);
 
@@ -30,6 +31,7 @@ const SignUpView = () => {
 
   const handleConfirmPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setConfirmPassword(e.target.value);
+    setPasswordsMatch(password === e.target.value);
   };
 
   const { data: user }: { data: any } = useQuery({
@@ -74,6 +76,12 @@ const SignUpView = () => {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      setPasswordsMatch(false);
+      return;
+    }
+
+    setPasswordsMatch(true);
     signUpMutation.mutate({ email, password });
   };
 
@@ -190,24 +198,31 @@ const SignUpView = () => {
                   required
                 />
               </div>
-              {/* <div>
-            <label
-              htmlFor="confirm-password"
-              className="block mb-2 text-sm font-medium"
-            >
-              Confirm password
-            </label>
-            <Input
-              type="password"
-              name="confirm-password"
-              id="confirm-password"
-              placeholder="••••••••"
-              bordered
-              value={confirmPassword}
-              onChange={handleConfirmPassword}
-              required
-            />
-          </div> */}
+              <div>
+                <label
+                  htmlFor="confirm-password"
+                  className="block mb-2 text-sm font-medium"
+                >
+                  Confirm password
+                </label>
+                <Input
+                  type="password"
+                  name="confirm-password"
+                  id="confirm-password"
+                  placeholder="••••••••"
+                  bordered
+                  variant={passwordsMatch ? "default" : "error"}
+                  className="mb-3"
+                  value={confirmPassword}
+                  onChange={handleConfirmPassword}
+                  required
+                />
+                {!passwordsMatch && (
+                  <p className="text-red-500 text-xs italic">
+                    Passwords does not match.
+                  </p>
+                )}
+              </div>
               <div className="card-actions">
                 <Button
                   type="submit"
