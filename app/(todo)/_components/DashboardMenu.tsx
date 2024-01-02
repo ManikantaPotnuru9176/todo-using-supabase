@@ -58,7 +58,7 @@ const DashboardMenu = () => {
           Preview
         </a>
       </li>
-      <div className="flex divide-y bg-primary-content w-px"></div>
+      <div className="flex divide-y bg-primary-content w-px mx-1"></div>
       <li>
         <a href="/">
           <svg
