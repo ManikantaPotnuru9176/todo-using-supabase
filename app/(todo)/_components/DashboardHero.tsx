@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import useTodoStore from "../_zustand/todoStore";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { updateData } from "@/app/_supabase/update";

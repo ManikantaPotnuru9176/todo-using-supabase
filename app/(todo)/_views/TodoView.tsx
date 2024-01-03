@@ -12,6 +12,7 @@ import { updateData } from "@/app/_supabase/update";
 import useTodoStore from "@/app/(todo)/_zustand/todoStore";
 import supabase from "@/app/_utils/supabase";
 import { cn } from "@/app/_utils/cn";
+import { useRouter } from "next/navigation";
 
 const TodoView = ({ edit }: { edit: boolean }) => {
   const queryClient = useQueryClient();
@@ -31,6 +32,8 @@ const TodoView = ({ edit }: { edit: boolean }) => {
 
   const [dummyEdit, setDummyEdit] = useState(false);
   const [open, setOpen] = useState(false);
+
+  const router = useRouter();
 
   const [todoHeroData, setTodoHeroData] = useState({
     title: "",
@@ -114,6 +117,15 @@ const TodoView = ({ edit }: { edit: boolean }) => {
 
   const addTodo = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!user) {
+      const confirmation = window.confirm(
+        "You are not logged in. To access all features, please log in."
+      );
+
+      if (confirmation) router.push("/auth/login");
+
+      return;
+    }
     if (input.trim() === "") return;
     insertMutation.mutate({ task: input, completed: false, user_id: user.id });
     setInput("");
