@@ -12,6 +12,7 @@ import { useQuery } from "@tanstack/react-query";
 import supabase from "@/app/_utils/supabase";
 
 const SignUpView = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -20,6 +21,10 @@ const SignUpView = () => {
   const [success, setSuccess] = useState(false);
 
   const router = useRouter();
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -54,8 +59,8 @@ const SignUpView = () => {
   });
 
   const signUpMutation = useMutation({
-    mutationFn: (formData: { email: string; password: string }) =>
-      signUpUser(formData.email, formData.password),
+    mutationFn: (formData: { name: string; email: string; password: string }) =>
+      signUpUser(formData.name, formData.email, formData.password),
     onSuccess: (data) => {
       if (data && data.user) {
         insertThemeMutation.mutate({ theme: "light", user_id: data.user.id });
@@ -82,7 +87,7 @@ const SignUpView = () => {
     }
 
     setPasswordsMatch(true);
-    signUpMutation.mutate({ email, password });
+    signUpMutation.mutate({ name, email, password });
   };
 
   return (
@@ -134,8 +139,8 @@ const SignUpView = () => {
                       y2="10.4791"
                       gradientUnits="userSpaceOnUse"
                     >
-                      <stop stop-color="#009217" />
-                      <stop offset="1" stop-color="#00FF29" />
+                      <stop stopColor="#009217" />
+                      <stop offset="1" stopColor="#00FF29" />
                     </linearGradient>
                   </defs>
                 </svg>
@@ -162,6 +167,24 @@ const SignUpView = () => {
               Create and account
             </h1>
             <form className="space-y-4 md:space-y-6" onSubmit={onSubmit}>
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block mb-2 text-sm font-medium"
+                >
+                  Your Name
+                </label>
+                <Input
+                  type="text"
+                  name="name"
+                  id="name"
+                  bordered
+                  placeholder="John"
+                  value={name}
+                  onChange={handleNameChange}
+                  required
+                />
+              </div>
               <div>
                 <label
                   htmlFor="email"

@@ -53,7 +53,7 @@ const TodoView = ({ edit }: { edit: boolean }) => {
   const { data: todos, isLoading }: { data: any; isLoading: boolean } =
     useQuery({
       queryKey: ["TodoData"],
-      queryFn: () => getData("todos", "*"),
+      queryFn: () => getData("todos", "*", "id"),
     });
 
   const insertMutation = useMutation({
@@ -172,7 +172,7 @@ const TodoView = ({ edit }: { edit: boolean }) => {
 
   const { data: todoHero }: { data: any } = useQuery({
     queryKey: ["TodoHero"],
-    queryFn: () => getData("todo_hero", "*"),
+    queryFn: () => getData("todo_hero", "*", "id"),
     select: (data) => data?.at(0),
   });
 

@@ -24,7 +24,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { data: userData, isLoading }: { data: any; isLoading: boolean } =
     useQuery({
       queryKey: ["userData"],
-      queryFn: () => getData("user", "*"),
+      queryFn: () => getData("user", "*", "id"),
       enabled: !userLoading,
       select: (data) => data?.at(0),
     });

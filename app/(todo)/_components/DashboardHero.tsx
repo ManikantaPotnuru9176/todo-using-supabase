@@ -1,9 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import useTodoStore from "../_zustand/todoStore";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { updateData } from "@/app/_supabase/update";
+import supabase from "@/app/_utils/supabase";
+import supabaseAdmin from "@/app/_utils/supabaseAdmin";
 
 const DashboardHero = () => {
   const themes = [
@@ -44,6 +46,14 @@ const DashboardHero = () => {
   const queryClient = useQueryClient();
 
   const { theme } = useTodoStore();
+
+  const { data: usersList }: { data: any } = useQuery({
+    queryKey: ["usersList"],
+    queryFn: () => supabaseAdmin.auth.admin.listUsers(),
+    select: (data) => data.data.users,
+  });
+
+  console.log("usersList: ", usersList);
 
   const updateMutation = useMutation({
     mutationFn: ({ updatedData }: { updatedData: object }) =>

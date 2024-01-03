@@ -1,11 +1,15 @@
 import supabase from "@/app/_utils/supabase";
 
-export const getData = async (tableName: string, columnNames: string) => {
+export const getData = async (
+  tableName: string,
+  columnNames: string,
+  orderBy: string
+) => {
   try {
     const { data, error, status } = await supabase
       .from(tableName)
       .select(columnNames)
-      .order("id");
+      .order(orderBy);
 
     if (error && status !== 406) throw error;
 

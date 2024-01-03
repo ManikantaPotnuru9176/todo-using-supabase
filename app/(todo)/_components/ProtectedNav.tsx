@@ -6,11 +6,11 @@ const ProtectedNav = ({ children }: { children: React.ReactNode }) => {
   const { data: userData, isLoading }: { data: any; isLoading: boolean } =
     useQuery({
       queryKey: ["userData", "userProtectedNav"],
-      queryFn: () => getData("user", "*"),
+      queryFn: () => getData("user", "*", "id"),
       select: (data) => data?.at(0),
     });
 
-  if (!isLoading && userData.role !== "admin") return null;
+  if (!isLoading && userData.role && userData.role !== "admin") return null;
 
   return <>{children}</>;
 };

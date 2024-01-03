@@ -14,7 +14,7 @@ export default function CustomThemeController({
   const { data: themeData, isLoading }: { data: any; isLoading: boolean } =
     useQuery({
       queryKey: ["theme"],
-      queryFn: () => getData("theme", "*"),
+      queryFn: () => getData("theme", "*", "id"),
       staleTime: Infinity,
     });
 
