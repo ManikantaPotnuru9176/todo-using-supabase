@@ -167,7 +167,7 @@ const SignUpView = () => {
               Create and account
             </h1>
             <form className="space-y-4 md:space-y-6" onSubmit={onSubmit}>
-              <div>
+              {/* <div>
                 <label
                   htmlFor="name"
                   className="block mb-2 text-sm font-medium"
@@ -184,7 +184,7 @@ const SignUpView = () => {
                   onChange={handleNameChange}
                   required
                 />
-              </div>
+              </div> */}
               <div>
                 <label
                   htmlFor="email"
