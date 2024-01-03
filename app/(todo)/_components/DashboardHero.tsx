@@ -66,7 +66,7 @@ const DashboardHero = () => {
     queryFn: () => getData("user", "*", "created_at"),
   });
 
-  const updateMutation = useMutation({
+  const updateThemeMutation = useMutation({
     mutationFn: ({ updatedData }: { updatedData: object }) =>
       updateData("theme", updatedData, "id", 10),
     onSuccess: () => {
@@ -74,9 +74,23 @@ const DashboardHero = () => {
     },
   });
 
+  const updateUserRoleMutation = useMutation({
+    mutationFn: ({ id, updatedData }: { id: string; updatedData: object }) =>
+      updateData("user", updatedData, "id", id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["usersRole"] });
+      queryClient.invalidateQueries({ queryKey: ["userDataProtectedRoute"] });
+    },
+  });
+
   const updateTheme = (newData: object) => {
     const updatedData = { updatedData: newData };
-    updateMutation.mutate(updatedData);
+    updateThemeMutation.mutate(updatedData);
+  };
+
+  const updateUserRole = (id: string, newData: object) => {
+    const updatedData = { id, updatedData: newData };
+    updateUserRoleMutation.mutate(updatedData);
   };
 
   return (
@@ -152,19 +166,25 @@ const DashboardHero = () => {
                       </span>
                     </td>
                     <th>
-                      <button
-                        className={cn(
-                          "btn btn-outline btn-xs  rounded-md",
-                          {
-                            "btn-error": role === "admin",
-                          },
-                          { "btn-success": role === "user" }
-                        )}
-                      >
-                        {role === "admin"
-                          ? "Remove admin access"
-                          : "Grant admin access"}
-                      </button>
+                      {role === "admin" ? (
+                        <button
+                          className="btn btn-outline btn-xs  rounded-md btn-error"
+                          onClick={() =>
+                            updateUserRole(user.id, { role: "user" })
+                          }
+                        >
+                          Revoke admin access
+                        </button>
+                      ) : (
+                        <button
+                          className="btn btn-outline btn-xs  rounded-md btn-success"
+                          onClick={() =>
+                            updateUserRole(user.id, { role: "admin" })
+                          }
+                        >
+                          Grant admin access
+                        </button>
+                      )}
                     </th>
                   </tr>
                 );
