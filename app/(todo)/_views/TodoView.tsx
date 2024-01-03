@@ -117,6 +117,7 @@ const TodoView = ({ edit }: { edit: boolean }) => {
 
   const addTodo = (e: React.FormEvent) => {
     e.preventDefault();
+    if (input.trim() === "") return;
     if (!user) {
       const confirmation = window.confirm(
         "You are not logged in. To access all features, please log in."
@@ -126,7 +127,6 @@ const TodoView = ({ edit }: { edit: boolean }) => {
 
       return;
     }
-    if (input.trim() === "") return;
     insertMutation.mutate({ task: input, completed: false, user_id: user.id });
     setInput("");
   };
@@ -313,9 +313,10 @@ const TodoView = ({ edit }: { edit: boolean }) => {
         </dialog>
       </div>
       <dialog id="my_modal_4" open={open} className="modal">
-        <div className="modal-box w-6/12 max-w-5xl">
-          <h3 className="font-bold text-lg">Edit the todo hero data</h3>
-          <div className="flex flex-col space-y-2">
+        <div className="modal-box w-6/12 max-w-md">
+          <h3 className="font-bold text-lg">Edit the Todo Hero Data</h3>
+
+          <div className="flex flex-col space-y-3">
             {todoHero &&
               todoHero.metadata &&
               Object.entries(todoHero.metadata).map(
@@ -330,6 +331,7 @@ const TodoView = ({ edit }: { edit: boolean }) => {
                 )
               )}
           </div>
+
           <div className="modal-action">
             <form
               method="dialog"
@@ -341,6 +343,7 @@ const TodoView = ({ edit }: { edit: boolean }) => {
               >
                 ✕
               </button>
+
               <Button type="submit" state="success" outline>
                 Submit
               </Button>
